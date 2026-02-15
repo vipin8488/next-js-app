@@ -1,0 +1,52 @@
+
+name: integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build: 
+
+    runs-on: ubuntu-latest
+
+    strategy:                   #strategy allows us to define a matrix of different configurations for our job
+      matrix:                   #matrix allows us to run the same job with different parameters
+        node-version: [18.x, 20.x, 22.x]
+        
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: "installing dependencies and building the project"
+      run: npm install
+
+    - name : "build command"
+      run : npm run build 
+
+  unit-tests:
+
+    runs-on: ubuntu-latest
+
+    strategy:                   #strategy allows us to define a matrix of different configurations for our job
+      matrix:                   #matrix allows us to run the same job with different parameters
+        node-version: [18.x, 20.x, 22.x]
+        
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: "installing dependencies and building the project"
+      run: npm install
+
+    - name : "build command"
+      run : npm run test
+    
