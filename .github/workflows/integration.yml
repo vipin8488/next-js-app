@@ -14,7 +14,7 @@ jobs:
 
     strategy:                   #strategy allows us to define a matrix of different configurations for our job
       matrix:                   #matrix allows us to run the same job with different parameters
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x]
         
     steps:
     - uses: actions/checkout@v4
@@ -35,7 +35,7 @@ jobs:
 
     strategy:                   #strategy allows us to define a matrix of different configurations for our job
       matrix:                   #matrix allows us to run the same job with different parameters
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [18.x]
         
     steps:
     - uses: actions/checkout@v4
@@ -47,6 +47,6 @@ jobs:
     - name: "installing dependencies and building the project"
       run: npm install
 
-    - name : "build command"
+    - name : "testing command"
       run : npm run test
     
