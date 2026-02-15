@@ -1,0 +1,17 @@
+name: Docker Image deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build the Docker image
+      run: docker build -t vipin84/next-js-githubaction_basic1:latest .
+    - run : echo "${{secrets.PASS_DOCKERPAT}}" | docker login -u ${{secrets.USERNAME}} --password-stdin 
+    - run : docker push vipin84/next-js-githubaction_basic1:latest
